@@ -1,0 +1,44 @@
+%div.ui.segment
+  = link_to (image_tag @pin.image_url.to_s, :class => "ui fluid image"), @pin.pin_url, target: "_blank"
+  %div.ui.horizontal.divider
+    by :
+    = @pin.user.email
+= link_to like_pin_path(@pin), method: :put, :class => 'ui right floated labeled button' do
+  %div.ui.red.button
+    %i.heart.icon
+    Like
+  %div.ui.basic.red.left.pointing.label
+    = @pin.get_upvotes.size
+
+  - if user_signed_in? && @pin.user.email == current_user.email
+    = link_to "Delete", @pin, method: :delete, data: { confirm: "Are you sure?"},:class => "ui right floated basic red button"
+    = link_to "Edit", edit_pin_path(@pin), :class => 'ui right floated green button'
+  = link_to "Visit", @pin.pin_url, target: "_blank", :class => "ui right floated basic red button"
+
+
+
+%div.ui.two.column.centered.stackable.grid
+  %div.ten.wide.column
+    %h1.ui.header
+      = @pin.title
+    %p.ui.description= @pin.description
+    %div.ui.comments
+      %h1
+        = form_tag "/pins/add_comment", method: "post",remote: true, class: "ui reply form" do
+          = hidden_field_tag "id", @pin.id
+          = text_field_tag :comment, nil,placeholder: "write you comment"
+          = submit_tag "Comment", class: 'ui mini floated blue button'
+      %h3.ui.dividing.header
+        Comments
+      - @pin.comments.each do |comment|
+        %div.comment
+          %a.avatar
+            %img{src: @pin.image.thumb.url}
+          %div.content
+            %a.author
+              = comment.user.email
+            %div.text
+              = comment.comment
+            %div.actions
+              %a.reply
+                Delete

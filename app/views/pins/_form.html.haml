@@ -1,0 +1,21 @@
+= simple_form_for @pin, html: {multipart: true} do |f|
+  = f.input :title
+  = f.hidden_field :pin_url, value: @pin.pin_url
+  = f.input :description
+  - if @pin.remote_image_url == nil
+    = f.input :image
+  = f.input :remote_image_url, label: "Or Image url"
+  = f.button :submit
+-# .ui.modal
+-#   .header
+-#     Modal Title
+-#   .image.content
+-#     = simple_form_for @pin, remote: true, :authenticity_token => true do |f|
+-#       = f.input :title
+-#       = f.hidden_field :pin_url, value: @pin.pin_url
+-#       = f.input :description
+-#       - if @pin.remote_image_url == nil
+-#         = f.input :image
+-#       = f.input :remote_image_url, label: "Or Image url"
+-#       .actions
+-#         = f.button :submit

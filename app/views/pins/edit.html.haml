@@ -1,0 +1,8 @@
+%div.ui.two.column.centered.stackable.grid
+  %div.column
+    %h1
+      Editing Pin
+    %div.ui.segment
+      = link_to 'Show', @pin, class: "tiny ui basic right floated green button"
+      = image_tag @pin.image_url.to_s, class: "ui centered image"
+      = render 'form', pin: @pin

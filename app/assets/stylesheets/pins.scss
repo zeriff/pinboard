@@ -1,0 +1,43 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require 'masonry/transitions'
+*/
+ // $font-url: 'http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic&subset=latin';
+ @import 'semantic-ui';
+
+#pins{
+		margin: auto;
+}
+.box {
+		padding: 6px;
+		width: 225px;
+	 	text-align: center;
+}
+.editform {
+	margin: auto;
+}
+h2 {
+	font-size: 22px;
+	margin: 0;
+	padding: 25px 10px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.pinform {
+  display: none;
+}

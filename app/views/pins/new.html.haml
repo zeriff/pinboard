@@ -1,0 +1,21 @@
+%div.ui.two.column.centered.stackable.grid
+  %div.ten.wide.column
+    %h1
+      New Pin
+    #showpinurlbtn.ui.red.basic.button
+      Pin Url
+    %h1
+      .pinform
+        = form_tag "/pins/get_info", method: "post", class: "ui reply form" do
+          %label
+            Pin Url
+            = text_field_tag :pin_url,@pin.pin_url, placeholder:"http://"
+          = submit_tag "Go", class: 'ui mini blue button'
+          #cancelpinurl.ui.mini.red.button
+            Cancel
+    .newform
+      %div.ui.horizontal.divider
+        Or
+      %br
+      = image_tag (@pin.remote_image_url || ""), class: "ui large centered image"
+      = render 'form', pin: @pin

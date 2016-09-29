@@ -1,0 +1,33 @@
+!!!5
+%html
+  %head
+    %title Pinboard
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
+  %body
+    %div.ui.menu
+      %div.item
+        = link_to "BOARD", root_path, data: { turbolinks: false}
+      %div.right.menu
+      - if user_signed_in?
+        %div.item
+          = link_to "New", new_pin_path, :type => "button", data: { turbolinks: false}, :class => "mini ui basic green button"
+        %div.item
+          = button_to edit_user_registration_path, method: :get, :type => "button", :class => "ui mini basic blue icon button" do
+            %i.user.icon
+        %div.item
+          = button_to destroy_user_session_path, method: :delete, :type => "button", :class => "mini ui basic red icon button" do
+            %i.sign.out.icon
+      - else
+        %div.item
+          = link_to "Sign In", new_user_session_path, :class => "ui basic blue button"
+        %div.item
+          = link_to "Sign Up", new_user_registration_path, :class => "ui basic grey button"
+
+    %div.ui.container
+      - flash.each do |name, msg|
+        %div.ui.info.message
+          = msg
+      =yield

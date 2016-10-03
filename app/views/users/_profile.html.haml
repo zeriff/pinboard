@@ -1,0 +1,44 @@
+%div.ui.stackable.column.grid
+  %div.eight.wide.column
+    %img.ui.fluid.image{:src => "https://res.cloudinary.com/idemo/image/upload/ar_355:247,c_fill,dpr_2.0,e_sharpen:200,g_faces,w_250/woman.jpg"}
+  %div.eight.wide.column
+    .info.middle.aligned
+      %div.ui.two.column.stackable.grid
+        %div.column
+          %h1= user.email
+        - if current_user == user
+          %div.column
+            %div.circular.ui.icon.top.left.pointing.dropdown.button
+              %i.icon.settings
+              %div.menu
+                %div.item.active
+                  Edit Profile
+                = link_to 'Find Friends', users_path, class: "item active"
+                %div.item
+                  = link_to "SignOut", destroy_user_session_path, method: :delete, class: "ui mini red button"
+
+
+      %div.ui.divider
+      = render 'shared/stats',pins: @pins, user: user
+    - if current_user != user
+      = render 'follows/form', user: user
+
+
+%div.ui.horizontal.divider
+  .ui.pointing.secondary.menu
+    %a.item{data: {tab: 'home'}}
+      %p
+        %i.ui.home.icon
+    %a.item.active{data: {tab: 'you'}}
+      %p You
+    %a.item{data: {tab: 'nexus'}}
+      %p Nexus
+
+.ui.tab{data: {tab: "home"}}
+  %p Public Activity
+.ui.active.tab{data: {tab: "you"}}
+  #pins.transitions-enabled
+    = render @pins
+
+.ui.tab{data: {tab: "nexus"}}
+  %p Friends actities

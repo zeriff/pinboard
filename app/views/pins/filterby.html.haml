@@ -1,0 +1,11 @@
+%br
+%div.ui.mini.floating.labeled.icon.dropdown.button
+  %i.filter.icon
+  %span.text
+    = @category
+  %div.menu
+    = link_to "All", root_path, class: 'item'
+    - Category.all.each do |c|
+      = link_to c.name, filter_path(c.id), remote: true,data: {turbolinks: false}, class: 'item'
+#pins.transitions-enabled
+  = render @pins

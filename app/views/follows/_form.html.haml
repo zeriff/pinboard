@@ -1,0 +1,5 @@
+%div.follow{id:"#{user.id}"}
+  - if current_user.following?(user)
+    = link_to "Unfollow", follow_path(user), method: :delete, remote: true, class: "ui red button"
+  - else
+    = link_to "Follow", follows_path(user), method: :post, remote:true, class: "ui blue button"

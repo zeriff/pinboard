@@ -1,0 +1,2 @@
+$(".follow#<%= @user.id %>").html("<%=j render('follows/form', user: @user) %>")
+$("#stats").html("<%=j render('shared/stats',pins: @user.pins, user: @user)  %>")

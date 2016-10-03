@@ -13,7 +13,15 @@
  *= require_self
  *= require_tree .
  *= require 'masonry/transitions'
+ *= require 'toastr.min'
 */
   // $import-google-fonts: false;
   // $font-url: 'http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic&subset=latin';
  @import 'semantic-ui';
+
+body{
+    width: 100%;
+}
+#content {
+  margin-top: 50px;
+}

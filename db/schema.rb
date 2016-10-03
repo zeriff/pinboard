@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928101745) do
+ActiveRecord::Schema.define(version: 20161003062804) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50, default: ""
@@ -26,6 +32,18 @@ ActiveRecord::Schema.define(version: 20160928101745) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.string   "followable_type",                 null: false
+    t.integer  "followable_id",                   null: false
+    t.string   "follower_type",                   null: false
+    t.integer  "follower_id",                     null: false
+    t.boolean  "blocked",         default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["followable_id", "followable_type"], name: "fk_followables"
+    t.index ["follower_id", "follower_type"], name: "fk_follows"
+  end
+
   create_table "pins", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -34,6 +52,7 @@ ActiveRecord::Schema.define(version: 20160928101745) do
     t.integer  "user_id"
     t.string   "image"
     t.string   "pin_url"
+    t.integer  "category_id"
     t.index ["user_id"], name: "index_pins_on_user_id"
   end
 

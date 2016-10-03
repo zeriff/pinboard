@@ -1,20 +1,26 @@
 class PinsController < ApplicationController
   before_action :set_pin, only: [:show, :edit, :update, :destroy, :upvote, :add_comment]
-  before_action :authenticate_user!, except: [:index,:show]
+  before_action :authenticate_user!, except: [:index,:show,:filterby]
 
   # AJAX DEMO
-  before_action :all_pins
+  # before_action :all_pins, only: [:index]
   respond_to :html, :js
 
   # GET /pins
   # GET /pins.json
   def index
+    @pins = Pin.all.order('created_at DESC')
+  end
 
+  def filterby
+    @pins = Pin.where(category_id: params[:category_id])
+    @category = Category.find(params[:category_id]).name;
   end
 
   # GET /pins/1
   # GET /pins/1.json
   def show
+    @comments = @pin.comments
   end
 
   # GET /pins/new
@@ -66,11 +72,6 @@ class PinsController < ApplicationController
   end
 
 
-  def upvote
-    @pin.upvote_by current_user
-    redirect_to :back
-  end
-
   def add_comment
     comment = @pin.comments.build(comment_params)
     comment.user = current_user;
@@ -114,6 +115,6 @@ class PinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pin_params
-      params.require(:pin).permit(:title, :description, :image, :remote_image_url, :pin_url)
+      params.require(:pin).permit(:title, :description, :image, :remote_image_url, :pin_url,:category_id)
     end
 end

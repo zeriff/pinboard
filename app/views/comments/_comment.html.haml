@@ -1,0 +1,12 @@
+%div.comment{id: comment.id}
+  %a.avatar
+    -# %img{src: @pin.image.thumb.url}
+  %div.content
+    %a.author
+      = link_to comment.user.email, user_path(comment.user)
+    %div.text
+      = comment.comment
+    %div.actions
+      - if comment.user == current_user
+        = link_to comment_path(comment), method: :delete, remote: true, data: {confirm: "Are you sure?"}, :class => 'reply' do
+          Delete

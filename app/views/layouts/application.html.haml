@@ -7,27 +7,63 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
   %body
-    %div.ui.menu
-      %div.item
-        = link_to "BOARD", root_path, data: { turbolinks: false}
-      %div.right.menu
-      - if user_signed_in?
+    %div.ui.top.fixed.mini.menu
+      %div.ui.container
         %div.item
-          = link_to "New", new_pin_path, :type => "button", data: { turbolinks: false}, :class => "mini ui basic green button"
-        %div.item
-          = button_to edit_user_registration_path, method: :get, :type => "button", :class => "ui mini basic blue icon button" do
-            %i.user.icon
-        %div.item
-          = button_to destroy_user_session_path, method: :delete, :type => "button", :class => "mini ui basic red icon button" do
-            %i.sign.out.icon
-      - else
-        %div.item
-          = link_to "Sign In", new_user_session_path, :class => "ui basic blue button"
-        %div.item
-          = link_to "Sign Up", new_user_registration_path, :class => "ui basic grey button"
+          = link_to "TuneXS", root_path, class: "ui circular google plus icon button"
+        %div.right.menu
+        - if user_signed_in?
+          %div.item
+            = link_to "New", new_pin_path, class: "ui basic green button"
+          %div.item
+            -# = link_to home_index_path, class: "ui circular facebook icon button" do
+            -#   %i.user.icon
+            -# %div.ui.labeled.button
+            = link_to home_index_path, class: "ui labeled button" do
+              %div.ui.mini.icon.orange.button
+                %i.user.icon
+              %div.ui.basic.label
+                = current_user.email
+        - else
+          %div.item
+            = link_to "Sign In", new_user_session_path, class: "ui basic blue button"
+          %div.item
+            = link_to "Sign Up", new_user_registration_path, class: "ui basic grey button"
+    #content
+      %div.ui.container
+        - flash.each do |name, msg|
+          %div.ui.info.message
+            = msg
+        =yield
 
-    %div.ui.container
-      - flash.each do |name, msg|
-        %div.ui.info.message
-          = msg
-      =yield
+
+-#         <div class="ui floating labeled icon dropdown button">
+-#   <i class="filter icon"></i>
+-#   <span class="text">Filter</span>
+-#   <div class="menu">
+-#     <div class="header">
+-#       Search Issues
+-#     </div>
+-#     <div class="ui left icon input">
+-#       <i class="search icon"></i>
+-#       <input type="text" name="search" placeholder="Search...">
+-#     </div>
+-#     <div class="header">
+-#       <i class="tags icon"></i>
+-#       Filter by tag
+-#     </div>
+-#     <div class="divider"></div>
+-#     <div class="item">
+-#       <div class="ui red empty circular label"></div>
+-#       Important
+-#     </div>
+-#     <div class="item">
+-#       <div class="ui blue empty circular label"></div>
+-#       Announcement
+-#     </div>
+-#     <div class="item">
+-#       <div class="ui black empty circular label"></div>
+-#       Discussion
+-#     </div>
+-#   </div>
+-# </div>

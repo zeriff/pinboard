@@ -1,0 +1,16 @@
+- if user_signed_in? && (current_user.liked? likeable)
+
+  = link_to like_path(@pin), method: :delete, remote: true, :class => 'ui right floated labeled button' do
+    %div.ui.mini.blue.button
+      %i.thumbs.up.icon
+      Liked
+    %div.ui.basic.blue.left.pointing.label
+      = @pin.get_upvotes.size
+
+- else
+  = link_to likes_path(@pin), remote: true, :class => 'ui right floated labeled button', id: "like" do
+    %div.ui.mini.grey.button
+      %i.thumbs.up.icon
+      Like
+    %div.ui.basic.grey.left.pointing.label
+      = @pin.get_upvotes.size

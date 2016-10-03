@@ -1,0 +1,16 @@
+%div.ui.two.centered.column.stackable.grid
+  %div.ten.wide.column
+    %div.ui.left.icon.action.input
+      %i.search.icon
+      %input{placeholder: "Search"}
+      %button.ui.button
+        search
+    %div.ui.divider
+    .container
+      %div.ui.massive.middle.aligned.divided.link.list
+        - @users.each do |user|
+          %div.item
+            %div.right.floated.content
+              = render 'follows/form', user: user
+            %div.content
+              = link_to user.email, user_path(user)

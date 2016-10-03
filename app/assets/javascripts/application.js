@@ -11,8 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require masonry/jquery.masonry
 //= require semantic-ui
-//= require turbolinks
+//= require toastr.min
 //= require_tree .

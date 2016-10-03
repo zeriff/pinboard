@@ -1,0 +1,5 @@
+%h1
+  = form_tag comments_path, method: "post", remote: true, class: "ui reply form", id: "commentform" do
+    = hidden_field_tag "id", @pin.id
+    = text_field_tag :comment, nil,placeholder: "write you comment"
+    = submit_tag "Comment", class: 'ui mini floated blue button'

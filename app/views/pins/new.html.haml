@@ -2,8 +2,6 @@
   %div.ten.wide.column
     %h1
       New Pin
-    #showpinurlbtn.ui.red.basic.button
-      Pin Url
     %h1
       .pinform
         = form_tag "/pins/get_info", method: "post", class: "ui reply form" do
@@ -13,9 +11,11 @@
           = submit_tag "Go", class: 'ui mini blue button'
           #cancelpinurl.ui.mini.red.button
             Cancel
-    .newform
+    - if @pin.remote_image_url == nil
+      #showpinurlbtn.ui.red.basic.button
+        Pin Url
       %div.ui.horizontal.divider
-        Or
+        Or Create your own
       %br
-      = image_tag (@pin.remote_image_url || ""), class: "ui large centered image"
+    .newform
       = render 'form', pin: @pin
